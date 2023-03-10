@@ -1,0 +1,4 @@
+filename,num_timesteps,num_timesteps_missing,avg_spatial_coverage,num_timesteps_abovecov,temporal_coverage,assesment_temporal,assesment_spatial
+31UCU_23,145,118,45.85393103448277,69,47.59,low,low
+37TDK_13,73,47,58.68041095890411,43,58.9,high,high
+37UET_06,119,80,61.86126050420168,75,63.03,high,high

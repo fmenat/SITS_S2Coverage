@@ -1,8 +1,9 @@
 import rasterio
 import numpy as np
+from scipy import interpolate
 
 class SpatialAnalyser:
-    def __init__(self, scl_mask:rasterio, idx_targets:list, boundary_mask:str=None):
+    def __init__(self, scl_mask:rasterio, idx_targets:list, boundary_mask:rasterio=None):
         '''
         Args:
             scl_mask: scl mask from s2 image used for filtering e.g. vegetated and not_vegetated
@@ -14,9 +15,13 @@ class SpatialAnalyser:
         self.scl_mask_arr = scl_mask.read(1)
         self.idx_targets = idx_targets 
         if boundary_mask is not None:
-            self.boundary_mask = rasterio.open(boundary_mask)
+            self.boundary_mask = boundary_mask
             self.boundary_mask_arr = self.boundary_mask.read(1) 
             self.boundary_mask_nodata = self.boundary_mask.meta['nodata']
+            scl_res, boundary_res = list(scl_mask.res), list(self.boundary_mask.res)
+            if scl_res != boundary_res:
+                window_size = int(scl_res[0] / boundary_res[0]) # 4
+                self.boundary_mask_arr = self._bicubic_interp(self.boundary_mask_arr, window_size)
         else:self.boundary_mask = None
         
    
@@ -40,10 +45,18 @@ class SpatialAnalyser:
         bool_mask = self._mask_array_from_list(arr1=bool_mask, arr2=self.scl_mask_arr, filter_=filter_)
         bool_mask_count = np.sum(bool_mask==1)
         #percentage of data used with respect to the image
-        percentage = bool_mask_count * 100 / total_size
+        percentage = round(bool_mask_count * 100 / total_size,2)
         #print(percentage)
         return percentage
     
+    @staticmethod
+    def _bicubic_interp(data, factor =4):
+        W, H= data.shape
+        f = interpolate.RectBivariateSpline(np.arange(0, W), np.arange(0, H), data, kx=3, ky=3)
+        x = np.arange(0, W, factor)
+        y = np.arange(0, H, factor)
+        return f(x,y)
+
     @staticmethod
     def _mask_array_from_list(arr1:np.array, arr2:np.array, filter_:list):
         '''Filter array1 based on filter values found in array2.

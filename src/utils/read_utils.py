@@ -2,6 +2,10 @@ import json
 import yaml
 import os
 
+def save_yaml(yaml_path:str,data:dict):
+    with open(yaml_path, 'w') as outfile:
+        yaml.dump(data, outfile, default_flow_style=False)
+
 def read_yaml(yaml_path:str):
     with open(yaml_path) as fd:
         dict = yaml.load(fd, Loader=yaml.SafeLoader)
