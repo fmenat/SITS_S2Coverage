@@ -1,6 +1,6 @@
 import os
 import rasterio
-from src.coverage_analysis.spatial_analyser import SpatialAnalyser
+from src.coverage_analysis.spatial_analyzer import SpatialAnalyzer
 
 class CoverageAnalysis:
     """
@@ -48,7 +48,7 @@ class CoverageAnalysis:
                 if spatial_cov >= self.min_spatial_coverage:
                     temporal_cov_counter.append(scl_mask)
             else:raise ValueError("Unexpected file extention for", scl_mask)
-        temporal_cov = round(len(temporal_cov_counter)*100/ total_ts,2)
+        temporal_cov = len(temporal_cov_counter)*100/ total_ts
         #fill assement dictionary - temporal coverage
         assesment_dict['temporal_coverage'] = temporal_cov
         assesment_dict['num_timesteps'] = total_ts
@@ -67,7 +67,7 @@ class CoverageAnalysis:
         return assesment_dict
     
     def _spatial_coverage(self,scl_mask,boundary_mask):
-        '''Analyses a single field, deliveres cloud and vegetate-non vegetated coverage
+        '''It analyzes a single field, deliveres cloud and vegetate-non vegetated coverage
         
         Args:
             scl_mask_path: path to cloud mask classification from S2
@@ -77,8 +77,8 @@ class CoverageAnalysis:
             cloud_coverage (float): percentage of field covered by clouds class.
             veg_non_veg_coverage (float): percentage of field covered by vegetated and non vegetated clas.
         '''
-        spatial_analyser_ = SpatialAnalyser(scl_mask, self.idx_targets, boundary_mask)
-        percentage = spatial_analyser_.target_analysis()
+        spatial_analyzer_ = SpatialAnalyzer(scl_mask, self.idx_targets, boundary_mask)
+        percentage = spatial_analyzer_.target_analysis()
         if self.strategy=='by_clouds':
             spatial_cov = 100 - percentage
         elif self.strategy=='by_classes':

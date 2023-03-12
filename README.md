@@ -1,12 +1,14 @@
 # SITS_S2Coverage
 [Sentinel-2](https://sentinel.esa.int/web/sentinel/missions/sentinel-2) Coverage on Satellite Images Time Series (SITS).
 
-![alt text](https://github.com/fmenat/sits_s2coverage/blob/main/imgs/Sentinel2.jpg?raw=true)
+<img src="imgs/Sentinel2.jpg" alt= “” width="20%">  
+
 > Source: [https://sentinel.esa.int/web/sentinel/missions/sentinel-2](https://sentinel.esa.int/web/sentinel/missions/sentinel-2)
 
 Based on **Scene Classification Layer** (SCL)
 
-![alt text](https://github.com/fmenat/sits_s2coverage/blob/main/imgs/scl.png?raw=true)
+<img src="imgs/scl.png" alt= “” width="30%">
+
 > Source: [https://docs.astraea.earth/hc/en-us/articles/360051409652-Masking-Sentinel-2-L2A-Using-RasterFrames](https://docs.astraea.earth/hc/en-us/articles/360051409652-Masking-Sentinel-2-L2A-Using-RasterFrames)
 
 
@@ -18,10 +20,11 @@ The task is to provide a *cultivated or not* map (binary classification) at a hi
 * Baseline used: Tarasiewicz, T., Tulczyjew, L., Myller, M., Kawulok, M., Longépé, N., & Nalepa, J. (2022, July). *Extracting High-Resolution Cultivated Land Maps from Sentinel-2 Image Series*. In IGARSS 2022-2022 IEEE International Geoscience and Remote Sensing Symposium (pp. 175-178). IEEE. DOI: [10.1109/IGARSS46834.2022.9883919](https://doi.org/10.1109/IGARSS46834.2022.9883919)
 
 
-> Prediction Performance by Patch: [result/ai4eo](result/ai4eo)
-> Outcome (Coverage result): [coverage/ai4eo](coverage/ai4eo)
+> Product generated  
+* Prediction Performance by Patch: [result/ai4eo](result/ai4eo)
+* Outcome (Coverage result): [coverage/ai4eo](coverage/ai4eo)
 
-*sample from [assesment_report_veg_70_70.csv](coverage/ai4eo/assesment_report_veg_70_70.csv)*:
+*sample from [assesment_by_classes_spatial_70_temporal_70.csv](coverage/ai4eo/assesment_by_classes_spatial_70_temporal_70.csv)*:
 |filename |num_timesteps | num_timesteps_missing | avg_spatial_coverage | num_timesteps_abovecov | temporal_coverage | assesment_temporal | assesment_spatial |
 | ---        | --- | ---| ---   | ---|---    | ---  | --- |
 |eopatch-841 | 38  | 38 | 81.87 | 30 | 78.95 | high | high|
@@ -30,14 +33,15 @@ The task is to provide a *cultivated or not* map (binary classification) at a hi
 | ...        | ... | ...| ...  | ... | ... | ... | ... |
 
 ## LandCoverNet  - Europe
-The task is to provide a land-cover map (7 class classification) at XX resolution. The data belongs to the Europe continent.
+The task is to provide a land-cover map (a classification based on 7 classes) at 10m resolution. The data is global but we executed only in three regions: Europe, Australia, South America.
 
 * Data source: https://mlhub.earth/data/ref_landcovernet_eu_v1
 * Reference: Alemohammad, H., & Booth, K. (2020). *LandCoverNet: A global benchmark land cover classification training dataset*. arXiv preprint [arXiv:2012.03111](https://arxiv.org/abs/2012.03111).
 
-> Outcome: [coverage/landcovernetEU](coverage/landcovernetEU)
-
-sample?
+> Product generated  
+* Outcome in Europe (Coverage result): [coverage/landcovernet_eu](coverage/landcovernet_eu)
+* Outcome in Australia (Coverage result): [coverage/landcovernet_au](coverage/landcovernet_au)
+* Outcome in South America (Coverage result): [coverage/landcovernet_sa](coverage/landcovernet_sa)
 
 
 ## Execution example
