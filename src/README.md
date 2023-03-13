@@ -57,7 +57,7 @@ data
 └── patch_id3
 └── . . .
 ```
-You still needs to create a yaml file with the following structure:
+You still need to create a yaml file with the following structure:
 ```
 patch_id1: 
     boundary_paths: null
