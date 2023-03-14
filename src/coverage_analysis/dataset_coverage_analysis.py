@@ -10,7 +10,6 @@ from src.multiprocess.multiprocess import mp_proxy
 def analyze_patch(
         patch_name:str, 
         idx_targets:list, 
-        strategy:str,
         min_spatial_coverage:int, 
         min_temporal_coverage:int,
         dataset_structure: dict,
@@ -23,7 +22,7 @@ def analyze_patch(
     scl_mask_paths = patch_structure['scl_mask_paths']
     boundary_paths = patch_structure['boundary_paths']
     CA =  CoverageAnalysis(scl_mask_paths, idx_targets, boundary_paths,
-                                strategy,min_spatial_coverage, min_temporal_coverage)
+                                min_spatial_coverage, min_temporal_coverage)
     assesment = CA.temporal_spatial_coverage()
 
     return {"assesment": assesment, "patch_name": patch_name}
@@ -32,7 +31,6 @@ def analyze_patch(
 def analyze_dataset(
         dataset_structure_path:str, 
         idx_targets:list, 
-        strategy:str='by_clouds',
         min_spatial_coverage:int=50, 
         min_temporal_coverage:int=50,
         output_dir: str = "",
@@ -56,7 +54,6 @@ def analyze_dataset(
         func=analyze_patch,
         static_func_kwargs={
             'idx_targets': idx_targets,
-            "strategy": strategy,
             "min_spatial_coverage": min_spatial_coverage,
             "min_temporal_coverage": min_temporal_coverage,
             "dataset_structure": dataset_structure
@@ -69,7 +66,7 @@ def analyze_dataset(
     #patches = [p for p in os.listdir(input_dir) if os.path.isdir(os.path.join(input_dir,p))]
     
     #start multiprocessing
-    print(f"Starting execution with the following configuration strategy={strategy}, idx_targets={idx_targets}, min_spatial_coverage={min_spatial_coverage}, {min_temporal_coverage}=min_temporal_coverage")
+    print(f"Starting execution with the following configuration idx_targets={idx_targets}, min_spatial_coverage={min_spatial_coverage}, {min_temporal_coverage}=min_temporal_coverage")
     assesment_accumulated = {}
     for patch in tqdm(mp_inst, total=len(dataset_structure)):
         assesment_accumulated[patch["patch_name"]] = patch["assesment"]
@@ -79,7 +76,8 @@ def analyze_dataset(
     if output_dir == "":
         output_dir = '../coverage/'
     #now = str(int(datetime.now().strftime("%Y%m%d%H%M%S")))
-    output_report_path = os.path.join(output_dir, 'assesment_{}_spatial_{}_temporal_{}.csv'.format(strategy,min_spatial_coverage,min_temporal_coverage))
+    target_str = "".join([f"{v:02d}" for v in idx_targets])
+    output_report_path = os.path.join(output_dir, 'assesment_spat_{}_temp_{}_sel_{}.csv'.format(min_spatial_coverage,min_temporal_coverage,target_str))
     result.to_csv(output_report_path)
 
     print(f">Analysis finished and stored in {output_report_path}")

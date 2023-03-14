@@ -5,11 +5,22 @@
 
 > Source: [https://sentinel.esa.int/web/sentinel/missions/sentinel-2](https://sentinel.esa.int/web/sentinel/missions/sentinel-2)
 
-Based on **Scene Classification Layer** (SCL)
+Based on **Scene Classification Layer** (SCL)  
+| Label   | Classification                        |
+|---:|:-------------------------|
+|  0 | NO_DATA                  |
+|  1 | SATURATED_OR_DEFECTIVE   |
+|  2 | DARK_AREA_PIXELS         |
+|  3 | CLOUD_SHADOWS            |
+|  4 | VEGETATION               |
+|  5 | NOT_VEGETATED            |
+|  6 | WATER                    |
+|  7 | UNCLASSIFIED             |
+|  8 | CLOUD_MEDIUM_PROBABILITY |
+|  9 | CLOUD_HIGH_PROBABILITY   |
+| 10 | THIN_CIRRUS              |
+| 11 | SNOW                     |
 
-<img src="../imgs/scl.png" alt= “” width="30%">
-
-> Source: [https://docs.astraea.earth/hc/en-us/articles/360051409652-Masking-Sentinel-2-L2A-Using-RasterFrames](https://docs.astraea.earth/hc/en-us/articles/360051409652-Masking-Sentinel-2-L2A-Using-RasterFrames)
 
 
 ## Execution example for coverage calculation
@@ -23,23 +34,21 @@ Based on **Scene Classification Layer** (SCL)
 
 In order to execute the code to perform the coverage evaluation in a dataset execute [main.py](./main.py). Example is shown below:
 ```python
-dataset_structure_path = '/path/to/datasetstructure/seebelow.yaml'
-strategy= 'by_classes' or 'by_clouds'
-idx_targets = [4,5] (for vegetated filtering - by classes) [8,9,3] (for cloud filtering - by clouds)
+idx_targets = [0,1,2,4,5,6,7,10,11] #index to be selected (all except 3, 8 and 9)
 min_spatial_coverage=50
-min_temporal_coverage=50      
-output_dir = "/path/to/output/dir/"
+min_temporal_coverage=50     
 num_process=-1
+dataset_structure_path = '/path/to/datasetstructure/seebelow.yaml'
+output_dir = "/path/to/output/dir/"
 results = analyze_dataset(dataset_structure_path = dataset_structure_path, 
                             idx_targets = idx_targets, 
-                            strategy = strategy, 
                             min_spatial_coverage = min_spatial_coverage, 
                             min_temporal_coverage = min_temporal_coverage,
                             output_dir=output_dir,
                             num_process=num_process
                             )
 ```
-> It will store a *.csv* file with the following taxonomy: ```assesment_X_spatial_Y_temporal_Z.csv```, where Y is the *min_spatial_coverage*, Z is the *min_temporal_coverage* and X is the *strategy* parameter.
+> It will store a *.csv* file with the following taxonomy: ```assesment_spat_X_temp_Y_sel_Z.csv```, where X is the *min_spatial_coverage*, Y is the *min_temporal_coverage* and > is the *idx_targets* parameter filled at two digits each target (e.g. idx_targets=[1,2], then Z="0102").
 
 Please be aware that independently of how the data is organized, e.g. like
 ```

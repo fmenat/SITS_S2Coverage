@@ -38,3 +38,12 @@ def pad(x, n=0, pad_v=0):
     if n==0:
         n = max(map(len, x))
     return [list(islice(chain(row,padv), n)) for row in x]
+
+
+def build_attached_dataframe(df_source, df_target):
+    return  pd.merge(df_target, df_source, left_index=True, right_index=True, how='right')
+
+def add_topk_column(df_data, k=5, column="temporal_coverage"):
+    limit_ = df_data[column].sort_values()[k]
+    print(f"Limit {column} is {limit_}")
+    df_data[f"assesment_top{k}"] = (df_data[column] <= limit_).apply(lambda x: "low" if x else "high")

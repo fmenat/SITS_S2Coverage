@@ -6,10 +6,21 @@
 > Source: [https://sentinel.esa.int/web/sentinel/missions/sentinel-2](https://sentinel.esa.int/web/sentinel/missions/sentinel-2)
 
 Based on **Scene Classification Layer** (SCL)
+| Label   | Classification                        |
+|---:|:-------------------------|
+|  0 | NO_DATA                  |
+|  1 | SATURATED_OR_DEFECTIVE   |
+|  2 | DARK_AREA_PIXELS         |
+|  3 | CLOUD_SHADOWS            |
+|  4 | VEGETATION               |
+|  5 | NOT_VEGETATED            |
+|  6 | WATER                    |
+|  7 | UNCLASSIFIED             |
+|  8 | CLOUD_MEDIUM_PROBABILITY |
+|  9 | CLOUD_HIGH_PROBABILITY   |
+| 10 | THIN_CIRRUS              |
+| 11 | SNOW                     |
 
-<img src="imgs/scl.png" alt= “” width="30%">
-
-> Source: [https://docs.astraea.earth/hc/en-us/articles/360051409652-Masking-Sentinel-2-L2A-Using-RasterFrames](https://docs.astraea.earth/hc/en-us/articles/360051409652-Masking-Sentinel-2-L2A-Using-RasterFrames)
 
 
 ## AI4EO - Enhanced Agriculture challenge
@@ -21,10 +32,10 @@ The task is to provide a *cultivated or not* map (binary classification) at a hi
 
 
 > Product generated  
-* Prediction Performance by Patch: [result/ai4eo](result/ai4eo)
+* Prediction Performance by Patch: [ml_results/ai4eo](ml_results/ai4eo)
 * Outcome (Coverage result): [coverage/ai4eo](coverage/ai4eo)
 
-*sample from [assesment_by_classes_spatial_70_temporal_70.csv](coverage/ai4eo/assesment_by_classes_spatial_70_temporal_70.csv)*:
+*sample from [assesment_spat_70_temp_70_sel_0405.csv](coverage/ai4eo/assesment_spat_70_temp_70_sel_0405.csv)*:
 |filename |num_timesteps | num_timesteps_missing | avg_spatial_coverage | num_timesteps_abovecov | temporal_coverage | assesment_temporal | assesment_spatial |
 | ---        | --- | ---| ---   | ---|---    | ---  | --- |
 |eopatch-841 | 38  | 38 | 81.87 | 30 | 78.95 | high | high|

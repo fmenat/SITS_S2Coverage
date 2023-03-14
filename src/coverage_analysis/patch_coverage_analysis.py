@@ -5,15 +5,18 @@ from src.coverage_analysis.spatial_analyzer import SpatialAnalyzer
 class CoverageAnalysis:
     """
     """
-    def __init__(self, scl_mask_paths:list, idx_targets:list, boundary_paths:list=None,
-                 strategy:str='by_clouds',min_spatial_coverage:int=50, min_temporal_coverage:int=50):
+    def __init__(self, 
+                 scl_mask_paths:list, 
+                 idx_targets:list, 
+                 boundary_paths:list=None,
+                 min_spatial_coverage:int=50, 
+                 min_temporal_coverage:int=50
+                 ):
         """Make analysis for the whole timeserie of one patch
         
-        strategy: Options -> 'by_clouds', 'by_classes'
         """
         #super(CoverageAnalysis,self).__init__()
         self.scl_mask_paths = scl_mask_paths
-        self.strategy = strategy
         self.min_spatial_coverage = min_spatial_coverage
         self.min_temporal_coverage = min_temporal_coverage
         self.idx_targets = idx_targets
@@ -78,10 +81,5 @@ class CoverageAnalysis:
             veg_non_veg_coverage (float): percentage of field covered by vegetated and non vegetated clas.
         '''
         spatial_analyzer_ = SpatialAnalyzer(scl_mask, self.idx_targets, boundary_mask)
-        percentage = spatial_analyzer_.target_analysis()
-        if self.strategy=='by_clouds':
-            spatial_cov = 100 - percentage
-        elif self.strategy=='by_classes':
-            spatial_cov = percentage
-        else: raise ValueError("Unexpected value of 'strategy'!", self.strategy)
+        spatial_cov = spatial_analyzer_.target_analysis()
         return spatial_cov

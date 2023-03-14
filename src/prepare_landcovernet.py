@@ -13,4 +13,4 @@ if __name__ == "__main__":
         dataset_structure[patch_id] = {'scl_mask_paths': cloud_paths, 'boundary_paths': None}
     print(f"In total {len(patches_ids)} patches were scanned ")
 
-    save_yaml(yaml_path='../coverage/landcovernet/landcovernet_structure_southamerica.yaml', data = dataset_structure)
+    save_yaml(yaml_path='../coverage/landcovernet_sa/landcovernet_structure_southamerica.yaml', data = dataset_structure)
