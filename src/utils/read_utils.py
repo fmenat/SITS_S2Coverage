@@ -1,6 +1,9 @@
 import json
 import yaml
 import os
+import gzip
+import pickle
+import numpy as np
 
 def save_yaml(yaml_path:str,data:dict):
     with open(yaml_path, 'w') as outfile:
@@ -31,3 +34,15 @@ def read_json(json_path: str) -> dict:
         return jdict
     else:
         raise FileNotFoundError(json_path)
+    
+def read_npy_gz(path:str):
+    """Access file in .npy.gz format
+    """
+    f = gzip.GzipFile(path, "r")
+    n = np.load(f)
+    return n
+
+def read_pkl_gz(path:str):
+    with gzip.open(os.path.join(path), 'rb') as f:
+        pkl_obj = pickle.load(f)
+    return pkl_obj

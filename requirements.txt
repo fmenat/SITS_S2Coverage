@@ -2,3 +2,4 @@ numpy~=1.22.3
 pandas~=1.4.1
 rasterio==1.2.4
 tqdm~=4.64.0
+sentinelhub==3.8.4

@@ -8,12 +8,13 @@ from src.coverage_analysis.SCL import IND_ALL_,IND_CLOUDS_, remove_labels
 
 
 if __name__ == "__main__":
-    dataset_structure_path = '../coverage/landcovernet_eu/landcovernet_structure_europe.yaml'
-
+    #dataset_structure_path = '../coverage/landcovernet_eu/landcovernet_structure_europe.yaml'
+    dataset_structure_path = '../coverage/YC/MX_First.yaml'
+    #dataset_structure_path = '../coverage/ai4eo/test.yaml'#/test.yaml' #/train.yaml
     idx_targets = remove_labels(IND_ALL_, IND_CLOUDS_) #index to be selected (all except 3, 8 and 9)
     min_spatial_coverage=70
     min_temporal_coverage=70      
-    output_dir = "./coverage/landcovernet_eu/"
+    output_dir = "../coverage/YC"
     num_process=-1
     results = analyze_dataset(dataset_structure_path = dataset_structure_path, 
                                 idx_targets = idx_targets, 

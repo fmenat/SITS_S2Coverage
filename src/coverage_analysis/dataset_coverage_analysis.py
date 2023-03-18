@@ -17,8 +17,6 @@ def analyze_patch(
     patch_structure = dataset_structure[patch_name]
     print("Starting to execute patch", patch_name)
     boundary_mask = None
-    #boundary_mask = os.path.join(input_dir,patch,'yield_masks','mean_scaled_yield_masked_regional_statistical_outlier.tif')
-    #timeseries_dir = os.path.join(input_dir,patch,'scl_masks')
     scl_mask_paths = patch_structure['scl_mask_paths']
     boundary_paths = patch_structure['boundary_paths']
     CA =  CoverageAnalysis(scl_mask_paths, idx_targets, boundary_paths,
@@ -63,7 +61,6 @@ def analyze_dataset(
         processes=num_process,
         chunksize=1,
         )
-    #patches = [p for p in os.listdir(input_dir) if os.path.isdir(os.path.join(input_dir,p))]
     
     #start multiprocessing
     print(f"Starting execution with the following configuration idx_targets={idx_targets}, min_spatial_coverage={min_spatial_coverage}, {min_temporal_coverage}=min_temporal_coverage")
@@ -75,9 +72,9 @@ def analyze_dataset(
     #save results
     if output_dir == "":
         output_dir = '../coverage/'
-    #now = str(int(datetime.now().strftime("%Y%m%d%H%M%S")))
+    now = str(int(datetime.now().strftime("%Y%m%d%H%M%S")))
     target_str = "".join([f"{v:02d}" for v in idx_targets])
-    output_report_path = os.path.join(output_dir, 'assesment_spat_{}_temp_{}_sel_{}.csv'.format(min_spatial_coverage,min_temporal_coverage,target_str))
+    output_report_path = os.path.join(output_dir, 'assesment_spat_{}_temp_{}_sel_{}_{}.csv'.format(min_spatial_coverage,min_temporal_coverage,target_str,now))
     result.to_csv(output_report_path)
 
     print(f">Analysis finished and stored in {output_report_path}")

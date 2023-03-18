@@ -2,6 +2,8 @@ import os
 import rasterio
 from src.coverage_analysis.spatial_analyzer import SpatialAnalyzer
 
+FILE_EXTENSIONS = ['.tif', '.tiff', '.TIF', '.TIFF']
+
 class CoverageAnalysis:
     """
     """
@@ -37,7 +39,7 @@ class CoverageAnalysis:
         #timeserie analysis
         temporal_cov_counter = []
         for idx,scl_mask in enumerate(self.scl_mask_paths):
-            if scl_mask.endswith('.tif') or scl_mask.endswith('.tiff') or scl_mask.endswith('.TIF') or scl_mask.endswith('.TIFF'):
+            if scl_mask.endswith(tuple(FILE_EXTENSIONS)):
                 total_ts+=1
                 #read data
                 scl_mask_raster = rasterio.open(scl_mask)
