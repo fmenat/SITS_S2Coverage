@@ -48,7 +48,7 @@ results = analyze_dataset(dataset_structure_path = dataset_structure_path,
                             num_process=num_process
                             )
 ```
-> It will store a *.csv* file with the following taxonomy: ```assesment_spat_X_temp_Y_sel_Z.csv```, where X is the *min_spatial_coverage*, Y is the *min_temporal_coverage* and > is the *idx_targets* parameter filled at two digits each target (e.g. idx_targets=[1,2], then Z="0102").
+> It will store a *.csv* file with the following taxonomy: ```assesment_spat_X_temp_Y_sel_Z_Q.csv```, where X is the *min_spatial_coverage*, Y is the *min_temporal_coverage*, Z is the *idx_targets* parameter filled at two digits each target (e.g. idx_targets=[1,2], then Z="0102"), and Q is the date time in *python datetime* format "YearMonthDayHourMinutesSeconds"
 
 Please be aware that independently of how the data is organized, e.g. like
 ```
@@ -85,4 +85,4 @@ patch_id2:
 . . .          
 ```
 
-> The name of the files and folder does not affect the calculation. However, the yaml file with the structure of the dataset has to be created. See the examples at [landcovernet_structure_australia.yaml](../coverage/landcovernet_au/landcovernet_structure_australia.yaml), created by [prepare_landcovernet.py](./prepare_landcovernet.py)
+> The name of the files and folder does not affect the calculation. However, the yaml file with the structure of the dataset has to be created. For instance, take a look at [landcovernet_structure_australia.yaml](../coverage/landcovernet_au/landcovernet_structure_australia.yaml) file created by [prepare_landcovernet.py](./prepare_landcovernet.py)

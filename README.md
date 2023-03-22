@@ -44,14 +44,17 @@ The task is to provide a *cultivated or not* map (binary classification) at a hi
 | ...        | ... | ...| ...  | ... | ... | ... | ... |
 
 ## LandCoverNet  - Europe
-The task is to provide a land-cover map (a classification based on 7 classes) at 10m resolution. The data is global but we executed only in three regions: Europe, Australia, South America.
+The task is to provide a land-cover map (a classification based on 7 classes) at 10m resolution. The data is global but distributed in different regions where we executed the assessment: Africa, Asia, Australia, Europe, North America, and South America.
 
 * Data source: https://mlhub.earth/data/ref_landcovernet_eu_v1
 * Reference: Alemohammad, H., & Booth, K. (2020). *LandCoverNet: A global benchmark land cover classification training dataset*. arXiv preprint [arXiv:2012.03111](https://arxiv.org/abs/2012.03111).
 
 > Product generated  
-* Outcome in Europe (Coverage result): [coverage/landcovernet_eu](coverage/landcovernet_eu)
+* Outcome in Africa (Coverage result): [coverage/landcovernet_af](coverage/landcovernet_af)
+* Outcome in Asia (Coverage result): [coverage/landcovernet_as](coverage/landcovernet_as)
 * Outcome in Australia (Coverage result): [coverage/landcovernet_au](coverage/landcovernet_au)
+* Outcome in Europe (Coverage result): [coverage/landcovernet_eu](coverage/landcovernet_eu)
+* Outcome in North America (Coverage result): [coverage/landcovernet_na](coverage/landcovernet_na)
 * Outcome in South America (Coverage result): [coverage/landcovernet_sa](coverage/landcovernet_sa)
 
 

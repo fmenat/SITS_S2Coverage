@@ -6,7 +6,7 @@ from src.utils.dataframe_based import build_attached_dataframe
 sns.set_style('whitegrid')
 
 def plot_coverage_order(dataframes: list, names_df:list, col: str, lower_limit_show:bool=False, lower_limit = 0):
-    fig, ax = plt.subplots(1,3, squeeze = False, figsize=(25,5),gridspec_kw={'width_ratios': [1, 1, 5]} )
+    fig, ax = plt.subplots(1,3, squeeze = False, figsize=(25,5),gridspec_kw={'width_ratios': [1, 2, 5]} )
         
     data_boxplots = []
     for i, df_data in enumerate(dataframes):
@@ -26,13 +26,15 @@ def plot_coverage_order(dataframes: list, names_df:list, col: str, lower_limit_s
             ax[0,0].axhline(lower_limit, color="r")
         data_boxplots.append(df_data[col])
         #sns.lineplot(data=df_data[col].values, marker="o", ax=ax[0,2], label=names_df[i], dashes=False)
-        ax[0,2].plot(df_data[col].values, marker="o", label=names_df[i], alpha=0.9)
+        ax[0,2].plot(df_data[col].values, marker="o", label=names_df[i], alpha=0.8, lw=4)
         ax[0,2].set_ylim(0,100)
         ax[0,2].set_xlabel("patches")
         ax[0,2].legend(loc="lower right")
         if lower_limit_show:
             ax[0,2].axhline(lower_limit, color="r")
     sns.boxplot(data=data_boxplots,  ax=ax[0,1]) #, meanline=True,showmeans=True)
+    ax[0,1].set_xticks([])
+    ax[0,1].set_label("Regions")
     if lower_limit_show:
         ax[0,1].axhline(lower_limit, color="r")
     ax[0,1].set_ylim(0,100)

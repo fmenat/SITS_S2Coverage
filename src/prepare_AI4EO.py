@@ -5,6 +5,7 @@ from utils.dir_utils import create_dir
 import numpy as np
 import rasterio
 from rasterio.transform import Affine
+from tqdm import tqdm
 
 def create_tif(arr:np.array, output_path:str, bbox, xres, yres):
     """Converts array into raterio object and save as tiff file.
@@ -36,18 +37,18 @@ if __name__ == "__main__":
     dataset_type = 'train' #'test'
     input_dir = os.path.join(dataset_dir,dataset_type)
     temp_restructured_folder = create_dir(os.path.join(str(Path(input_dir).parent),dataset_type+'_s2coverage_restructured_temp'))
-    patches_ids =  os.listdir(input_dir)
+    patches_ids =  sorted(os.listdir(input_dir))
     dataset_structure =  dict.fromkeys(patches_ids, {})
     print(patches_ids)
-    for patch_id in patches_ids:
-        print(patch_id,'___')
+    for patch_id in tqdm(patches_ids, total=len(patches_ids)):
         new_patch_path = create_dir(os.path.join(temp_restructured_folder,patch_id))
         scl_aggregated_array = read_npy_gz(os.path.join(input_dir,patch_id,'mask','SCL.npy.gz'))
         bbox = read_pkl_gz(os.path.join(input_dir,patch_id,'bbox.pkl.gz'))
         aggregated_array_to_files(new_patch_path,scl_aggregated_array,bbox)
         scl_mask_paths = [os.path.join(new_patch_path,file) for file in os.listdir(new_patch_path)]
-        dataset_structure[patch_id] = {'scl_mask_paths': scl_mask_paths, 'boundary_paths': None}
+        dataset_structure[patch_id] = {'scl_mask_paths': sorted(scl_mask_paths), 'boundary_paths': None}
     print(f"In total {len(patches_ids)} patches were scanned ")
-    output_yaml = os.path.join('../coverage/ai4eo/',dataset_type+'.yaml')
+
+    output_yaml = f"./coverage/ai4eo/ai4eo_structure_{dataset_type}.yaml"
     save_yaml(yaml_path=output_yaml, data = dataset_structure)
 

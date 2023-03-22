@@ -33,6 +33,7 @@ def analyze_dataset(
         min_temporal_coverage:int=50,
         output_dir: str = "",
         num_process=1,
+        include_date: bool = True,
         ):
     """
     dataset_structure (str): path to yaml file dictionary containing conventional of dataset:
@@ -74,7 +75,10 @@ def analyze_dataset(
         output_dir = '../coverage/'
     now = str(int(datetime.now().strftime("%Y%m%d%H%M%S")))
     target_str = "".join([f"{v:02d}" for v in idx_targets])
-    output_report_path = os.path.join(output_dir, 'assesment_spat_{}_temp_{}_sel_{}_{}.csv'.format(min_spatial_coverage,min_temporal_coverage,target_str,now))
+    if include_date:
+        output_report_path = os.path.join(output_dir, 'assesment_spat_{}_temp_{}_sel_{}_{}.csv'.format(min_spatial_coverage,min_temporal_coverage,target_str,now))
+    else:
+        output_report_path = os.path.join(output_dir, 'assesment_spat_{}_temp_{}_sel_{}.csv'.format(min_spatial_coverage,min_temporal_coverage,target_str))
     result.to_csv(output_report_path)
 
     print(f">Analysis finished and stored in {output_report_path}")
