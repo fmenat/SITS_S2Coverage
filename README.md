@@ -66,13 +66,13 @@ For examples on execution go to [src/README.md](src/README.md)
 Cristhian Sanchez and Francisco Mena. 
 
 
-## Citation
-Sanchez, C., et al. "Assessment of Sentinel-2 Spatial and Temporal Coverage based on the Scene Classification Layer." *IEEE International Geoscience and Remote Sensing Symposium (IGARSS)* (2024).
+## 🖊️ Citation
+Sanchez, C., et al. "*Assessment of Sentinel-2 Spatial and Temporal Coverage based on the Scene Classification Layer.*" IEEE International Geoscience and Remote Sensing Symposium (IGARSS), 2024.
 
 > Bibtex
-```
+```bibtex
 @inproceedings{sitscoverage2024,
-  title = {Assessment of {Sentinel-2} Spatial and Temporal Coverage based on the {Scene} {Classification} {Layer}},
+  title = {Assessment of {Sentinel-2} spatial and temporal coverage based on the {Scene} {Classification} {Layer}},
   booktitle = {{IEEE International Geoscience} and {Remote Sensing Symposium} ({IGARSS})},
   author = {Sanchez, Cristhian and Mena, Francisco and Charfuelan, Marcela and Nuske, Marlon and Dengel, Andreas},
   year = {2024},
