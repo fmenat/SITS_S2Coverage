@@ -1,6 +1,9 @@
 # SITS_S2Coverage
  [![paper](https://img.shields.io/badge/arXiv-2406.18584-D12424)](https://www.arxiv.org/abs/2406.18584) 
+[![DOI:10.1109/IGARSS53475.2024.10642213](http://img.shields.io/badge/DOI-10.1109/IGARSS53475.2024.10642213-blue.svg)](https://doi.org/10.1109/IGARSS53475.2024.10642213)
 
+> Public repository of our work [*Assessment of Sentinel-2 Spatial and Temporal Coverage based on the Scene Classification Layer*](https://ieeexplore.ieee.org/abstract/document/10642213)
+---
 [Sentinel-2](https://sentinel.esa.int/web/sentinel/missions/sentinel-2) Coverage on Satellite Images Time Series (SITS).
 
 <img src="imgs/Sentinel2.jpg" alt= “” width="20%">  
@@ -77,6 +80,7 @@ Sanchez, C., et al. "*Assessment of Sentinel-2 Spatial and Temporal Coverage bas
   author = {Sanchez, Cristhian and Mena, Francisco and Charfuelan, Marcela and Nuske, Marlon and Dengel, Andreas},
   year = {2024},
   publisher = {{IEEE}},
+  doi={10.1109/IGARSS53475.2024.10642213}
 }
 ```
 
